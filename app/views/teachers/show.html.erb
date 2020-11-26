@@ -1,13 +1,13 @@
-<h1><%= teacher.name %> <small><%= teacher.campus %></small></h1>
+<h1><%= @teacher.name %> <small><%= @teacher.campus %></small></h1>
 <h2>
   <%= pluralize(@teacher.reviews.size, "review") %>
 </h2>
 
 <div id="reviews">
-  <% if teacher.reviews.blank? %>
-    Be the first to leave a review for <%= teacher.name %>
+  <% if @teacher.reviews.blank? %>
+    <p>Be the first to leave a review for <%= @teacher.name %></p>
   <% else %>
-    <% teacher.reviews.each do |review| %>
+    <% @teacher.reviews.each do |review| %>
       <p><%= review.content %></p>
     <% end %>
   <% end %>
