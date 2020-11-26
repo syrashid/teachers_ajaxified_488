@@ -4,7 +4,7 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.teacher = @teacher
     if @review.save
-      redirect_to teacher_path(@teacher)
+      redirect_to teacher_path(@teacher, anchor: "review-#{@review.id}")
     else
       render 'teachers/show'
     end
