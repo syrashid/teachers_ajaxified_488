@@ -4,7 +4,15 @@ export default class extends Controller {
   static targets = [ "count" ]
 
   connect() {
-    setInterval(this.refresh, 3000);
+    setInterval(this.asyncRefresh, 3000);
+  }
+
+  // The below is done with async/await as opposed to your normal fetch syntax
+  asyncRefresh = async () => {
+    const response = await fetch('/teachers', { headers: { accept: "application/json" } });
+    const data = await response.json();
+    this.countTarget.innerText = data.teachers.length;
+    console.log("Hey, I've been refreshed, but now with async/await! 🎉");
   }
 
   refresh = () => {
@@ -16,6 +24,5 @@ export default class extends Controller {
         this.countTarget.innerText = data.teachers.length;
       });
     console.log("Hey, I've been refreshed! 🎉")
-
   }
 }
